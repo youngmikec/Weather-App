@@ -1,0 +1,19 @@
+  {
+    "name": "Smash It",
+    "short_name": "Smash It",
+    "start_url": "http://localhost/",
+    "background_color": "#232447",
+    "theme_color": "#222353",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "img/client-1.png",
+            "sizes": "250x250",
+            "type": "img/png"
+        }
+    ],
+    "permissions": [
+        "https://www.google.com/",
+        "https://*/"
+      ]
+  }

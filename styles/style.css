@@ -1,0 +1,194 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+aside{
+  flex: .25;
+  height: 100vh;
+  width: 5%;
+  background: rgb(49, 49, 49);
+  
+}
+article{
+  flex: 5;
+  padding-top: 5%;
+}
+body{
+  color: white; 
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.f-1{
+  flex:1;
+}
+.f-3{
+  flex:3;
+}
+h1{
+  font-weight: 700;
+}
+h2{
+  font-weight: 600;
+}
+h3{
+  font-weight: 400;
+}
+#main{
+  background-image: radial-gradient(farthest-corner at 30% 3%,rgb(159, 159, 160),rgb(35, 36, 71),black);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  /* padding: 0 2%; */
+}
+
+a{
+  color: rgb(212, 211, 211);
+  text-decoration: none;
+  font-size: 2.4em;
+}
+a:visited{
+  color: rgb(212, 211, 211);
+}
+li{
+  margin: 3em 0;
+  font-size: 14px;
+  padding: .4em .7em .4em 1em;
+}
+li:hover{
+  background: rgb(63, 63, 63);
+}
+
+.box{
+  margin: auto 15%;
+}
+.box-fluid{
+  margin: auto 3%;
+}
+
+
+
+#detail{
+  background: rgba(35, 36, 71, 0.534);
+  border-radius: 5px;
+}
+.forecast-card:hover{
+  background: rgba(255, 255, 255, 0.383);
+}
+.forecast-card{
+  width:20%;
+  display: inline-block;
+  border-radius: 5px;
+}
+#prev-forecast{
+  background: rgb(35, 36, 71);
+  border-radius: 5px;
+  height: 250px;
+  
+}
+span{
+  font-size: 10px;
+}
+
+#low{
+  margin-top: 100px;
+}
+#temo{
+  border-radius: 5px;
+}
+#thermometer{
+  height: 150px;
+  width: 10px;
+  border-radius: 10px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+  /* display: flex;
+  flex-direction: row; */
+}
+#thermo-progress{
+  position: relative;
+  top: 20%;
+  height: 100%;
+  background: rgb(0, 110, 255);
+  border-radius: 3px;
+}
+#temo-base{
+  background: rgb(0, 110, 255);
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  position: absolute;
+  left: -4.8px;
+  bottom: 5px;
+}
+
+
+
+
+
+
+.p-rel{
+  position: relative;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.p-rel-t-10{
+  position: relative;
+  top: 10%;
+}
+.p-rel-t-20{
+  position: relative;
+  top: 20%;
+}.p-rel-t-30{
+  position: relative;
+  top: 30%;
+}.p-rel-t-40{
+  position: relative;
+  top: 40%;
+}
+.p-rel-t-auto{
+  position: relative;
+  top: auto;
+}
+.p-ab{
+  position: absolute;
+}
+.p-ab-top-10{
+  position:absolute;
+  top: 10%;
+}.p-ab-top-20{
+  position:absolute;
+  top: 20%;
+}.p-ab-top-30{
+  position:absolute;
+  top: 30%;
+}.p-ab-top-40{
+  position:absolute;
+  top: 40%;
+}
+.p-ab-top-auto{
+  position:absolute;
+  top: auto;
+}
+
+.dp-h{
+  display: none;
+}
+.dp-b{
+  display: block;
+}
+.dp-f{
+  display: flex;
+}
+
+.center{
+  width: 40%;
+  margin: auto;
+}
+h1[class="center"]{
+  font-size: 8em;
+}
