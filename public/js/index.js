@@ -3179,6 +3179,7 @@ const countries = [
   
     }
     data;
+    historyArray = [];
   
     getDataFromStorage(){
       let obj = JSON.parse(localStorage.getItem('weather'));
@@ -3223,8 +3224,13 @@ const countries = [
         this.drawHumidityCircle(this.data);
         this.drawPressureCircle(this.data);
         this.drawLineChart(this.data);
+        this.historyArray.push(this.data);
+        this.save(this.historyArray, 'history');
         return this.data;
-      }).catch(err => console.error(err));
+      }).catch(err => {
+          if(err) this.printError('Error in connection, check your internet connection and refresh the page');
+          console.error(err)
+        });
     }
     getData(){
       console.log(this.data);
@@ -3289,7 +3295,10 @@ const countries = [
       
   
   }
-  
+    printError(msg = ''){
+        let errorDiv = document.querySelector('#temp');
+        errorDiv.innerHTML = `<h1> ${msg} </h1>`;
+    }
     stripeAll(){
       this.removeTemperature();
       this.removeHistory();
@@ -3445,21 +3454,22 @@ const countries = [
         weather.fetchData(coords);  
       }
   
-      let historyArray = [];
       
       const inp = document.querySelector('#country');
       const btn = document.querySelector('#submit');
   
       btn.addEventListener('click', (e)=>{
           e.preventDefault();
-          localStorage.removeItem('weather');
-          weather.stripeAll();
-          coords = getCoordinates(inp.value); 
-          weather.fetchData(coords);
-          let wobj = weather.getDataFromStorage();
-          console.log(wobj);
-          historyArray.push(wobj);
-          weather.save(wobj, 'history');
+          if(inp.value == ''){
+            weather.printError('The input field should contain a valid country name');
+          }else{
+            localStorage.removeItem('weather');
+            weather.stripeAll();
+            coords = getCoordinates(inp.value); 
+            weather.fetchData(coords);
+
+          }
+          
           //window.location.reload();
       });
   
