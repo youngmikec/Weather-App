@@ -3436,6 +3436,8 @@ const countries = [
   
   
       let weather = new WeatherApp();
+      weather.historyArray = JSON.parse(localStorage.getItem('history'));
+      console.log(weather.historyArray);
       if(weather.checkData()){
         //weather.getLatLon();
         let weatherData = weather.getDataFromStorage();
@@ -3467,11 +3469,12 @@ const countries = [
             weather.stripeAll();
             coords = getCoordinates(inp.value); 
             weather.fetchData(coords);
+            
 
-          }
+        }
           
-          //window.location.reload();
-      });
+          
+    });
   
   
   
