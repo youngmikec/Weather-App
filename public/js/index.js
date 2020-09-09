@@ -3292,8 +3292,6 @@ const countries = [
       ctx.fillText(`${Math.ceil(obj.current.wind_speed)}`, 40, 55);
       ctx.font = '10px Roboto';
       ctx.fillText(`km/h`, 35, 65);
-      
-  
   }
     printError(msg = ''){
         let errorDiv = document.querySelector('#temp');
@@ -3475,6 +3473,8 @@ const countries = [
           
           
     });
+
+   console.log(countries.find(ele => ele.country_code == 'NY'));
   
   
   
