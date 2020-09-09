@@ -5,7 +5,7 @@
 aside{
   flex: .25;
   height: 100vh;
-  width: 5%;
+  width: max-content;
   background: rgb(49, 49, 49);
   
 }
@@ -52,7 +52,7 @@ h3{
   background-image: radial-gradient(farthest-corner at 30% 3%,rgb(159, 159, 160),rgb(35, 36, 71),black);
   background-repeat: no-repeat;
   background-size: cover;
-  width: auto;
+  width: 100%;
   height: max-content;
   /* padding: 0 2%; */
 }
@@ -61,14 +61,22 @@ nav{
   width: 50%;
   margin-bottom: .87em;
 }
-a{
+ a{
   color: rgb(212, 211, 211);
   text-decoration: none;
   font-size: 2.4em;
 
 }
-a:visited{
+aside a:visited{
   color: rgb(212, 211, 211);
+}
+#c1{
+  float: left; 
+  margin-right: 45%;
+}
+#c2{
+  float: left; 
+  margin-right: 36%;
 }
 li{
   margin: 3em 0;
@@ -89,9 +97,22 @@ li:hover{
 
 
 #detail{
-  margin-top: 5%;
+  margin-top: 8%;
+  margin-bottom: 3%;
   background: rgba(35, 36, 71, 0.534);
   border-radius: 5px;
+}
+footer{
+  background: transparent;
+  text-align: center;
+}
+footer li{
+  display: inline;
+  font-size: 50%;
+}
+footer a:hover{
+  background: none;
+  cursor: pointer;
 }
 .forecast-card:hover{
   background: rgba(255, 255, 255, 0.383);
@@ -220,6 +241,17 @@ h1[class="center"]{
   font-size: 8em;
 }
 
+@media only screen and (min-width: 848px){
+  #c1{
+    margin-right: 50%;
+    text-align: center;
+  }
+  #c2{
+    margin-right: 45%;
+    text-align: center;
+  }
+}
+
 @media only screen and (max-width: 848px){
 
   #detail{
@@ -229,6 +261,7 @@ h1[class="center"]{
   aside{
     display: inline-block;
     width: auto;
+    height: inherit;
   }
   aside a{
     font-size: 100%;
@@ -237,13 +270,15 @@ h1[class="center"]{
     width: 100%;
   }
   #curve_chart div[dir="ltr"] svg{
-    width: 80%;
+    width: 100%;
   }
   #c1{
     margin-right: 50%;
+    text-align: center;
   }
   #c2{
-    margin-right: 50%;
+    margin-right: 45.5%;
+    text-align: center;
   }
 }
 
@@ -265,15 +300,60 @@ nav{
   margin: 0 0 .87em 10%;
   width: 70%;
 }
-  main{
-    height: auto;
-  }
+#main {
+  height: auto;
+  overflow: hidden;
+}
   main:nth-child(1){
     height: max-content;
     position: relative;
   }
 }
 
-@media only screen and (min-width: 320px){
-
+@media only screen and (max-width: 440px){
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  aside{
+    width: 100%;
+    height: 100%;
+  }
+  #curve_chart div[dir="ltr"] svg{
+    width: 100%;
+  }
+  aside li{
+    display: inline;
+  }
+  .dp-f{
+    display: block;
+  }
+  #main:nth-child(1){
+    position: relative;
+    display: block;
+  }
+  #c1{
+    text-align: center;
+    margin: 0;
+    float: none;
+  }
+  #c2{
+    float: none;
+    margin: 0;
+    text-align: center;
+  }
+  nav{
+    width: 100%;
+  }
+  #wind-speed{
+    text-align: center;
+    float: none;
+  }
+  #humidity{
+    text-align: center;
+    float: none;
+  }
+  #prev-forecast{
+    margin-bottom: 8%;
+  }
 }
