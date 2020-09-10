@@ -3140,20 +3140,6 @@ const countries = [
   
   
   
-  
-  window.addEventListener('load', ()=>{
-    setTimeout(()=>{
-      let main = document.querySelector('#main');
-      let Intro = document.querySelector('#Intro');
-  
-      main.classList.replace('dp-h', 'dp-b');
-      Intro.classList.replace('dp-b', 'dp-h');
-      
-    }, 2000);
-  
-  });
-  
-  
   function getCoordinates(name){
     let result;
     result = countries.find(element => {return element.name == name});
@@ -3161,19 +3147,9 @@ const countries = [
     return result.latlng;
   }
   
-  let coords;
-  coords = getCoordinates('Canada');
   
-  
-  if("serviceWorker" in navigator){
-    navigator.serviceWorker.register('../sw.js').then(reg => {
-      console.log('ServiceWorker registered');
-      console.log(reg);
-    }).catch(err => console.error(err));
-  }else{
-    console.log('Application not supported');
-  }
-  
+
+  // Class weather app
   class WeatherApp{
     constructor(location = ''){
   
@@ -3206,7 +3182,7 @@ const countries = [
       }
     }
   
-    fetchData(arr){
+    fetchData(arr = [40.7128,-73.935242]){
      //console.log(LAT, LON);
       let API_KEY = '22d07d00abe21b42f42813b12e1b9380';
       let Lapi = 'api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}'
@@ -3217,9 +3193,9 @@ const countries = [
       }).then(result =>{
         this.data = result;
         console.log(this.data)
+        this.save(this.data);
         this.historyArray.push(this.data);
         this.save(this.historyArray, 'history');
-        this.save(this.data);
         this.populateTemperature(this.data);
         for(let k = 0; k < 4; k++){
           this.populateHistory(this.data.daily[k]);
@@ -3431,14 +3407,27 @@ const countries = [
     }
   }
   
-  
-  let historyArray;
-  
+    // Initailize a new weather class.
       let weather = new WeatherApp();
 
+    //variable declaration
+    let coords;
+    const inp = document.querySelector('#country');
+    const btn = document.querySelector('#submit');
+    
+    //registers serviceworker if it does not exist already.
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.register('../sw.js').then(reg => {
+      console.log('ServiceWorker registered');
+      console.log(reg);
+    }).catch(err => console.error(err));
+}else{
+    console.log('Application not supported');
+  }
+
+    //Check if there is a data previously stored cached.
       if(weather.checkData()){
-        //weather.getLatLon();
-        let weatherData = weather.getDataFromStorage();
+          let weatherData = weather.getDataFromStorage();
         let data = weatherData;
         console.log(data);
         weather.stripeAll();
@@ -3449,15 +3438,16 @@ const countries = [
           weather.drawLineChart(data);
           weather.drawHumidityCircle(data);
           weather.drawPressureCircle(data);
-        // weather.save();
-      }else{
-        weather.fetchData(coords);  
-      }
-  
-      
-      const inp = document.querySelector('#country');
-      const btn = document.querySelector('#submit');
-  
+          // weather.save();
+        }else{
+            weather.fetchData(coords);  
+        }
+        
+        
+        
+    let str = weather.data.current.weather[0].main.split(' ');
+    let div = document.querySelector('#prediction');
+  // button event handler
       btn.addEventListener('click', (e)=>{
           e.preventDefault();
           if(inp.value == ''){
@@ -3466,11 +3456,18 @@ const countries = [
             localStorage.removeItem('weather');
             weather.stripeAll();
             coords = getCoordinates(inp.value); 
-            weather.fetchData(coords);
-            
-
+            weather.fetchData(coords);    
         }      
     });
+
+    //makes decision if an outdoor event will hold or not.
+    if(str.includes('Rain')){
+        let message = 'Not suitable for outdoor events';
+        div.innerHTML = `<h1>${message}</h1>`;
+    }else{
+        let message = "You can host your events";
+        div.innerHTML = `<h1>${message}</h1>`;
+    }
 
   
   
