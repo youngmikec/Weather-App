@@ -62,17 +62,16 @@ function populateHistoryPage(history){
         //let heading1 = document.createElement('h2');
 
         //set attributes and properties
-        container.style.display = 'flex';
+        container.setAttribute('id', 'container');
         heading1.textContent = `${element.timezone}`;
         heading2.innerHTML = `${Math.ceil(element.current.temp - 273)}<sup>oc</sup>`;
         heading3.textContent = `${element.current.weather[0].description}`;
-        leftdiv.style.flex = '1';
-        rightdiv.style.flex = '1';
+        leftdiv.classList.add('flex');
+        rightdiv.classList.add('flex');
         rightdiv.innerHTML = `
         <div class="f-1">
-        <h1>History</h1>
               <div style="margin-bottom: 5%;">
-                <div style="float: left; margin-right: 48%;">
+                <div id="c1">
                     <h2>Sun rise</h2>
                     <h3><i class="fa fa-sun-o" aria-hidden="true"></i>   ${new Date(element.daily[0].sunset).getHours()}hours</h3>
                     <h2>Sun Set</h2>
@@ -85,7 +84,7 @@ function populateHistoryPage(history){
               </div>
 
               <div>
-                <div style="float: left; margin-right: 40%;">
+                <div id="c2">
                   <h2>Record Rain</h2>
                   <h3><i class="fa fa-tint" aria-hidden="true" style="color: #4db6f3"></i>   ${element.daily[0].rain}(2020)</h3>
                   <h2>Average Rain</h2>

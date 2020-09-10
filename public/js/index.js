@@ -3179,7 +3179,7 @@ const countries = [
   
     }
     data;
-    historyArray = [];
+    historyArray = new Array;
   
     getDataFromStorage(){
       let obj = JSON.parse(localStorage.getItem('weather'));
@@ -3216,6 +3216,9 @@ const countries = [
          return res.json();
       }).then(result =>{
         this.data = result;
+        console.log(this.data)
+        this.historyArray.push(this.data);
+        this.save(this.historyArray, 'history');
         this.save(this.data);
         this.populateTemperature(this.data);
         for(let k = 0; k < 4; k++){
@@ -3223,9 +3226,7 @@ const countries = [
         }
         this.drawHumidityCircle(this.data);
         this.drawPressureCircle(this.data);
-        this.drawLineChart(this.data);
-        this.historyArray.push(this.data);
-        this.save(this.historyArray, 'history');
+        this.drawLineChart(this.data);  
         return this.data;
       }).catch(err => {
           if(err) this.printError('Error in connection, check your internet connection and refresh the page');
@@ -3431,11 +3432,10 @@ const countries = [
   }
   
   
-  
+  let historyArray;
   
       let weather = new WeatherApp();
-      weather.historyArray = JSON.parse(localStorage.getItem('history'));
-      console.log(weather.historyArray);
+
       if(weather.checkData()){
         //weather.getLatLon();
         let weatherData = weather.getDataFromStorage();
@@ -3469,12 +3469,9 @@ const countries = [
             weather.fetchData(coords);
             
 
-        }
-          
-          
+        }      
     });
 
-   console.log(countries.find(ele => ele.country_code == 'NY'));
   
   
   

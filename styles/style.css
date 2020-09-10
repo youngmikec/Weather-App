@@ -5,7 +5,7 @@
 aside{
   flex: .25;
   height: 100vh;
-  width: 5%;
+  width: max-content;
   background: rgb(49, 49, 49);
   
 }
@@ -19,11 +19,25 @@ body{
   font-weight: 400;
 }
 
+#curve-chart{
+  background: transparent;
+}
 .f-1{
   flex:1;
 }
 .f-3{
   flex:3;
+}
+input{
+  background: transparent;
+  color: white;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  padding: .67em .87em;
+}
+#submit{
+  border: none;
+  background: #4db6f3;
 }
 h1{
   font-weight: 700;
@@ -39,17 +53,30 @@ h3{
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 100%;
+  height: max-content;
   /* padding: 0 2%; */
 }
-
-a{
+nav{
+  margin: auto;
+  width: 50%;
+  margin-bottom: .87em;
+}
+ a{
   color: rgb(212, 211, 211);
   text-decoration: none;
   font-size: 2.4em;
+
 }
-a:visited{
+aside a:visited{
   color: rgb(212, 211, 211);
+}
+#c1{
+  float: left; 
+  margin-right: 45%;
+}
+#c2{
+  float: left; 
+  margin-right: 36%;
 }
 li{
   margin: 3em 0;
@@ -57,7 +84,7 @@ li{
   padding: .4em .7em .4em 1em;
 }
 li:hover{
-  background: rgb(63, 63, 63);
+  background: rgb(194, 194, 194);
 }
 
 .box{
@@ -70,8 +97,22 @@ li:hover{
 
 
 #detail{
+  margin-top: 8%;
+  margin-bottom: 3%;
   background: rgba(35, 36, 71, 0.534);
   border-radius: 5px;
+}
+footer{
+  background: transparent;
+  text-align: center;
+}
+footer li{
+  display: inline;
+  font-size: 50%;
+}
+footer a:hover{
+  background: none;
+  cursor: pointer;
 }
 .forecast-card:hover{
   background: rgba(255, 255, 255, 0.383);
@@ -80,6 +121,7 @@ li:hover{
   width:20%;
   display: inline-block;
   border-radius: 5px;
+  margin: 5px 2%;
 }
 #prev-forecast{
   background: rgb(35, 36, 71);
@@ -90,6 +132,7 @@ li:hover{
 span{
   font-size: 10px;
 }
+
 
 #low{
   margin-top: 100px;
@@ -123,7 +166,12 @@ span{
   left: -4.8px;
   bottom: 5px;
 }
-
+#prev-forecast{
+  height: max-content;
+}
+#top-component{
+  height: max-content;
+}
 
 
 
@@ -191,4 +239,121 @@ span{
 }
 h1[class="center"]{
   font-size: 8em;
+}
+
+@media only screen and (min-width: 848px){
+  #c1{
+    margin-right: 50%;
+    text-align: center;
+  }
+  #c2{
+    margin-right: 45%;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 848px){
+
+  #detail{
+    display: block;
+    height: max-content;
+  }
+  aside{
+    display: inline-block;
+    width: auto;
+    height: inherit;
+  }
+  aside a{
+    font-size: 100%;
+  }
+  #curve_chart div[dir="ltr"]{
+    width: 100%;
+  }
+  #curve_chart div[dir="ltr"] svg{
+    width: 100%;
+  }
+  #c1{
+    margin-right: 50%;
+    text-align: center;
+  }
+  #c2{
+    margin-right: 45.5%;
+    text-align: center;
+  }
+}
+
+
+@media only screen and (max-width: 554px){
+  #temp{
+    display: inline-block;
+  margin-right: 5%;
+  justify-content: left;
+}
+  #curve_chart div[dir="ltr"] svg{
+    width: 80%;
+  }
+.center{
+  width: 40%;
+  margin: 0 20%;
+}
+nav{
+  margin: 0 0 .87em 10%;
+  width: 70%;
+}
+#main {
+  height: auto;
+  overflow: hidden;
+}
+  main:nth-child(1){
+    height: max-content;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 440px){
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  aside{
+    width: 100%;
+    height: 100%;
+  }
+  #curve_chart div[dir="ltr"] svg{
+    width: 100%;
+  }
+  aside li{
+    display: inline;
+  }
+  .dp-f{
+    display: block;
+  }
+  #main:nth-child(1){
+    position: relative;
+    display: block;
+  }
+  #c1{
+    text-align: center;
+    margin: 0;
+    float: none;
+  }
+  #c2{
+    float: none;
+    margin: 0;
+    text-align: center;
+  }
+  nav{
+    width: 100%;
+  }
+  #wind-speed{
+    text-align: center;
+    float: none;
+  }
+  #humidity{
+    text-align: center;
+    float: none;
+  }
+  #prev-forecast{
+    margin-bottom: 8%;
+  }
 }

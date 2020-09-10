@@ -285,7 +285,7 @@ h1[class="center"]{
 
 @media only screen and (max-width: 554px){
   #temp{
-    display: inline-block;
+  display: inline-block;
   margin-right: 5%;
   justify-content: left;
 }
