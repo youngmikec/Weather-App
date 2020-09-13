@@ -3181,12 +3181,14 @@ const countries = [
           localStorage.setItem(location, JSON.stringify(obj));
       }
     }
-  
-    fetchData(arr = [40.7128,-73.935242]){
+
+    fetchData(city = ''){
+        if(city == '') city = 'Enugu';
+        
      //console.log(LAT, LON);
       let API_KEY = '22d07d00abe21b42f42813b12e1b9380';
       let Lapi = 'api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}'
-      let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${arr[0]}&lon=${arr[1]}&appid=${API_KEY}`;
+      let api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
       fetch(api)
       .then(res => {
          return res.json();
@@ -3198,7 +3200,7 @@ const countries = [
         this.save(this.historyArray, 'history');
         this.populateTemperature(this.data);
         for(let k = 0; k < 4; k++){
-          this.populateHistory(this.data.daily[k]);
+          //this.populateHistory(this.data.daily[k]);
         }
         this.drawHumidityCircle(this.data);
         this.drawPressureCircle(this.data);
@@ -3228,7 +3230,7 @@ const countries = [
       canvas.setAttribute('height', '100%');
       parent.appendChild(canvas);
       let ctx = canvas.getContext("2d");
-      let value = (obj.current.humidity * 2)/100;
+      let value = (obj.main.humidity * 2)/100;
       ctx.beginPath();
       ctx.arc(50, 50, 40, 0, 2 * Math.PI);
       ctx.lineWidth = 4; 
@@ -3241,7 +3243,7 @@ const countries = [
       ctx.stroke();
       ctx.font = '20px Roboto';
       ctx.fillStyle = 'white';
-      ctx.fillText(`${obj.current.humidity}%`, 35, 55)
+      ctx.fillText(`${obj.main.humidity}%`, 35, 55);
       
   
   }
@@ -3253,7 +3255,7 @@ const countries = [
       canvas.setAttribute('height', '100%');
       parent.appendChild(canvas);
       let ctx = canvas.getContext("2d");
-      let value = (obj.current.wind_speed * 2)/100;
+      let value = (obj.wind.speed * 2)/100;
       ctx.beginPath();
       ctx.arc(50, 50, 40, 0, 2 * Math.PI);
       ctx.lineWidth = 4; 
@@ -3266,7 +3268,7 @@ const countries = [
       ctx.stroke();
       ctx.font = '20px Roboto';
       ctx.fillStyle = 'white';
-      ctx.fillText(`${Math.ceil(obj.current.wind_speed)}`, 40, 55);
+      ctx.fillText(`${Math.ceil(obj.wind.speed)}`, 40, 55);
       ctx.font = '10px Roboto';
       ctx.fillText(`km/h`, 35, 65);
   }
@@ -3297,12 +3299,12 @@ const countries = [
       let sup = document.createElement('sup');
       let progress = document.querySelector('#thermo-progress');
   
-      progress.style.top = `${100 - Math.ceil(obj.current.temp - 273)}%`;
+      progress.style.top = `${100 - Math.ceil(obj.main.temp - 273)}%`;
       sup.innerHTML = 'oc';
-      heading1.innerHTML = obj.timezone;
-      heading2.innerHTML = Math.ceil(obj.current.temp - 273);
+      heading1.innerHTML = `${obj.name}/${obj.sys.country}`;
+      heading2.innerHTML = Math.ceil(obj.main.temp - 273);
       heading2.appendChild(sup);
-      heading3.innerHTML = obj.current.weather[0].description;
+      heading3.innerHTML = obj.weather[0].description;
   
       heading1.setAttribute('class', 'center');
       heading2.setAttribute('class', 'center');
@@ -3411,7 +3413,7 @@ const countries = [
       let weather = new WeatherApp();
 
     //variable declaration
-    let coords;
+    
     const inp = document.querySelector('#country');
     const btn = document.querySelector('#submit');
     
@@ -3432,43 +3434,48 @@ const countries = [
         console.log(data);
         weather.stripeAll();
         weather.populateTemperature(data);
-        for(let k = 0; k < 4; k++){
-            weather.populateHistory(data.daily[k]);
-          }
-          weather.drawLineChart(data);
+        // for(let k = 0; k < 4; k++){
+        //     weather.populateHistory(data.daily[k]);
+        // }
+          //weather.drawLineChart(data);
           weather.drawHumidityCircle(data);
           weather.drawPressureCircle(data);
           // weather.save();
         }else{
-            weather.fetchData(coords);  
+            weather.fetchData();  
         }
         
         
         
-    let str = weather.data.current.weather[0].main.split(' ');
+    //let str = weather.data.current.weather[0].main.split(' ');
     let div = document.querySelector('#prediction');
   // button event handler
       btn.addEventListener('click', (e)=>{
           e.preventDefault();
           if(inp.value == ''){
             weather.printError('The input field should contain a valid country name');
+            weather.fetchData();    
           }else{
             localStorage.removeItem('weather');
             weather.stripeAll();
-            coords = getCoordinates(inp.value); 
-            weather.fetchData(coords);    
+            // coords = getCoordinates(inp.value); 
+            weather.fetchData(inp.value);    
         }      
     });
 
     //makes decision if an outdoor event will hold or not.
-    if(str.includes('Rain')){
-        let message = 'Not suitable for outdoor events';
-        div.innerHTML = `<h1>${message}</h1>`;
-    }else{
-        let message = "You can host your events";
-        div.innerHTML = `<h1>${message}</h1>`;
+    function checkRain(){
+        if(str.includes('Rain')){
+            let message = 'Not suitable for outdoor events';
+            div.innerHTML = `<h1>${message}</h1>`;
+        }else{
+            let message = "You can host your events";
+            div.innerHTML = `<h1>${message}</h1>`;
+        }
+
     }
 
+    checkRain();
   
   
   
