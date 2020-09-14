@@ -3204,7 +3204,7 @@ const countries = [
         }
         this.drawHumidityCircle(this.data);
         this.drawPressureCircle(this.data);
-        this.drawLineChart(this.data);  
+        //this.drawLineChart(this.data);  
         return this.data;
       }).catch(err => {
           if(err) this.printError('Error in connection, check your internet connection and refresh the page');
@@ -3452,9 +3452,10 @@ const countries = [
   // button event handler
       btn.addEventListener('click', (e)=>{
           e.preventDefault();
+          console.log(inp.value);
           if(inp.value == ''){
             weather.printError('The input field should contain a valid country name');
-            weather.fetchData();    
+            //weather.fetchData();    
           }else{
             localStorage.removeItem('weather');
             weather.stripeAll();
@@ -3464,6 +3465,8 @@ const countries = [
     });
 
     //makes decision if an outdoor event will hold or not.
+    let str = weather.data.weather[0].main;
+    console.log(str);
     function checkRain(){
         if(str.includes('Rain')){
             let message = 'Not suitable for outdoor events';
