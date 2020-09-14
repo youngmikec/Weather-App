@@ -63,9 +63,9 @@ function populateHistoryPage(history){
 
         //set attributes and properties
         container.setAttribute('id', 'container');
-        heading1.textContent = `${element.timezone}`;
-        heading2.innerHTML = `${Math.ceil(element.current.temp - 273)}<sup>oc</sup>`;
-        heading3.textContent = `${element.current.weather[0].description}`;
+        heading1.textContent = `${element.name}/ ${element.sys.country}`;
+        heading2.innerHTML = `${Math.ceil(element.main.temp - 273)}<sup>oc</sup>`;
+        heading3.textContent = `${element.weather[0].description}`;
         leftdiv.classList.add('flex');
         rightdiv.classList.add('flex');
         rightdiv.innerHTML = `
@@ -73,9 +73,9 @@ function populateHistoryPage(history){
               <div style="margin-bottom: 5%;">
                 <div id="c1">
                     <h2>Sun rise</h2>
-                    <h3><i class="fa fa-sun-o" aria-hidden="true"></i>   ${new Date(element.daily[0].sunset).getHours()}hours</h3>
+                    <h3><i class="fa fa-sun-o" aria-hidden="true"></i>   ${new Date(element.sys.sunset).getHours()}hours</h3>
                     <h2>Sun Set</h2>
-                    <h3><i class="fa fa-moon-o" aria-hidden="true">   ${new Date(element.daily[0].sunrise).getMinutes()}hours</i></h3>
+                    <h3><i class="fa fa-moon-o" aria-hidden="true">   ${new Date(element.sys.sunrise).getMinutes()}hours</i></h3>
                 </div>
                 <div class="humidity">
                   <h3>Humidity</h3>
@@ -85,10 +85,10 @@ function populateHistoryPage(history){
 
               <div>
                 <div id="c2">
-                  <h2>Record Rain</h2>
-                  <h3><i class="fa fa-tint" aria-hidden="true" style="color: #4db6f3"></i>   ${element.daily[0].rain}(2020)</h3>
-                  <h2>Average Rain</h2>
-                  <h3><i class="fa fa-tint" aria-hidden="true" style="color: #4db6f3"></i>   ${element.daily.forEach((r,i,a) => {let t; return t = (t + r.rain)})}cm</h3>
+                  <h2>Wind speed</h2>
+                  <h3><i class="fa fa-tachometer" aria-hidden="true" style="color: #4db6f3"></i>   ${element.wind.speed}</h3>
+                  <h2>Wind degree</h2>
+                  <h3><i class="fa fa-compass" aria-hidden="true" style="color: #4db6f3"></i>   ${element.wind.deg}</h3>
                 </div>
                 <div class="wind-speed">
                   <h3>Wind speed</h3>
